@@ -93,31 +93,28 @@ struct Node {
 };
 */
 class Solution {
+  private:
+    void dfs(vector<int>& v, Node *node)
+    {
+        if(node->left)
+        {
+            dfs(v, node->left);
+        }
+        v.push_back(node->data);
+        if(node->right)
+        {
+            dfs(v, node->right);
+        }
+    }
   public:
     // Function to return a list of integers denoting the node
     // values of both the BST in a sorted order.
-   void fun(Node*root,multiset<int>&s)
-    {
-        if(root==NULL)
-        {
-            return;
-        }
-        s.insert(root->data);
-        fun(root->left,s);
-        fun(root->right,s);
-        
-    }
-    
     vector<int> merge(Node *root1, Node *root2) {
         // Your code here
-        vector<int>v;
-        multiset<int>s;
-        fun(root1,s);
-        fun(root2,s);
-        for( auto i = s.begin();i!=s.end();i++)
-        {
-            v.push_back(*i);
-        }
+        vector<int> v;
+        dfs(v, root1);
+        dfs(v, root2);
+        sort(v.begin(), v.end());
         return v;
     }
 };
