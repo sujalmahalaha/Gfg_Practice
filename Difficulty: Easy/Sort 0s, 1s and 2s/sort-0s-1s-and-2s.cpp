@@ -7,18 +7,27 @@ using namespace std;
 class Solution {
   public:
     void sort012(vector<int>& arr) {
-        int n = arr.size();
-        int st = 0, mid = 0, end = n-1;
-        while(mid <= end) {
-            if(arr[mid] == 1) {
-                mid++;
-            } else if(arr[mid] == 0) {
-                swap(arr[st], arr[mid]);
-                st++, mid++;
-            } else if(arr[mid] == 2) {
-                swap(arr[mid], arr[end]);
-                end--;
-            }
+        // code here
+        int mp[3] = {0};
+        for(auto it : arr)
+        {
+            mp[it]++;
+        }
+        int ind = 0;
+        for(int j=0; j<mp[0]; j++)
+        {
+            arr[ind] = 0;
+            ind++;
+        }
+        for(int j=0; j<mp[1]; j++)
+        {
+            arr[ind] = 1;
+            ind++;
+        }
+        for(int j=0; j<mp[2]; j++)
+        {
+            arr[ind] = 2;
+            ind++;
         }
     }
 };
@@ -49,6 +58,7 @@ int main() {
         }
 
         cout << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
