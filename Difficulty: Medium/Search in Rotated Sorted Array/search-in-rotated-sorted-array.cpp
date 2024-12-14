@@ -6,17 +6,30 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-     int search(vector<int>& arr, int key) {
-        int i,l;
-        l=arr.size();
-
-        for (i=0;i<l;i++){
-            if(arr[i]==key){
-                return i;
+  int search(vector<int>& arr, int key) {
+        // complete the function here
+        int n=arr.size();
+        int lo=0, hi=n-1;
+        
+        while(lo<=hi){
+            int mid=lo+(hi-lo)/2;
+            if(arr[mid]==key) return mid;
+            else if(arr[mid]>=arr[lo]){
+                if(key>=arr[lo] && key<arr[mid]){
+                    hi=mid-1;
+                }else{
+                    lo=mid+1;
+                }
+            }else if(arr[mid]<arr[hi]){
+                if(key>arr[mid] && key<=arr[hi]){
+                    lo=mid+1;
+                }else{
+                    hi=mid-1;
+                }
             }
         }
+        
         return -1;
-        // complete the function here
     }
 };
 
@@ -38,6 +51,7 @@ int main() {
         cin >> key;
         Solution ob;
         cout << ob.search(arr, key) << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
