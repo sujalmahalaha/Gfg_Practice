@@ -6,20 +6,28 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
+      int kthElement(vector<int>& a, vector<int>& b, int k) {
         // code here
-          multiset<int> st;
-        for(int i=0;i<arr1.size();i++)
-        {
-            st.insert(arr1[i]);
+        int i=0,j=0;
+        vector<int> res;
+        while(i<a.size() && j<b.size()){
+            if(a[i]>b[j]){
+                res.push_back(b[j]);
+                j++;
+            }else{
+                res.push_back(a[i]);
+                i++;
+            }
         }
-        for(int i=0;i<arr2.size();i++)
-        {
-            st.insert(arr2[i]);
+        while(i<a.size()){
+            res.push_back(a[i]);
+            i++;
         }
-        set<int>::iterator it=st.begin();
-        advance(it,k-1);
-        return *it;
+        while(j<b.size()){
+            res.push_back(b[j]);
+            j++;
+        }
+        return res[k-1];
     }
 };
 
@@ -36,22 +44,22 @@ int main() {
         cin.ignore();
         string input;
         int num;
-        vector<int> arr1, arr2;
+        vector<int> a, b;
 
         getline(cin, input);
         stringstream s2(input);
         while (s2 >> num) {
-            arr1.push_back(num);
+            a.push_back(num);
         }
 
         getline(cin, input);
         stringstream s3(input);
         while (s3 >> num) {
-            arr2.push_back(num);
+            b.push_back(num);
         }
 
         Solution ob;
-        cout << ob.kthElement(k, arr1, arr2) << endl;
+        cout << ob.kthElement(a, b, k) << endl << "~\n";
     }
     return 0;
 }
