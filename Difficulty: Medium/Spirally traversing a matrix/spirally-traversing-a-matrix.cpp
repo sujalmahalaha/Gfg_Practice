@@ -6,38 +6,39 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    vector<int> spirallyTraverse(vector<vector<int> > &matrix) {
-        int n = matrix.size();
-        int m = matrix[0].size();
-        int top = 0;
-        int left = 0;
-        int right = m-1;
-        int bottom = n-1;
-        vector<int> ans;
-
-        while(left <= right && top <= bottom){
-            for(int i=left; i<=right; i++){
-                ans.push_back(matrix[top][i]);
+   vector<int> spirallyTraverse(vector<vector<int> > &v) {
+        vector<int> ans; 
+        int i1 = 0; 
+        int i2 = v.size()-1; 
+        int j1 = 0;
+        int j2 = v[0].size()-1;
+    
+        
+        while(i1<=i2 && j1<=j2){
+            for(int p = j1;p <= j2;p++){
+                ans.push_back(v[i1][p]) ;
             }
-            top++;
-            for(int i=top; i<=bottom; i++){
-                ans.push_back(matrix[i][right]);
+            i1++; 
+            for(int q = i1;q <= i2;q++){
+                ans.push_back(v[q][j2]); 
             }
-            right--;
-            if(top <= bottom){
-                for(int i=right; i>=left; i--){
-                ans.push_back(matrix[bottom][i]);
+            j2--; 
+            if(i1<=i2){
+                for(int r = j2;r >= j1;r--){
+                ans.push_back(v[i2][r]);
                 }
-                bottom--;
+                i2--;
             }
-            if(left <= right){
-                for(int i=bottom; i>=top; i--){
-                ans.push_back(matrix[i][left]);
+            
+            if(j1<=j2){
+                for(int s = i2;s >= i1;s--){
+                    ans.push_back(v[s][j1]); 
                 }
-                left++;
+                j1++; 
             }
-        }
-        return ans;
+        }  
+        
+        return ans; 
     }
 };
 
@@ -49,9 +50,10 @@ int main() {
     while (t--) {
         int r, c;
         cin >> r >> c;
-        vector<vector<int>> matrix(r, vector<int>(c, 0));
+        vector<vector<int>> matrix(r);
 
         for (int i = 0; i < r; i++) {
+            matrix[i].assign(c, 0);
             for (int j = 0; j < c; j++) {
                 cin >> matrix[i][j];
             }
@@ -62,6 +64,9 @@ int main() {
         for (int i = 0; i < result.size(); ++i)
             cout << result[i] << " ";
         cout << endl;
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
